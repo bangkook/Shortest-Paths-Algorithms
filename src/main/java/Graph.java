@@ -2,8 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 class Graph {
     static final int INF = Integer.MAX_VALUE;
@@ -66,7 +65,29 @@ class Graph {
         }
 
     }
-    public void Dijkstra() {
+    public void Dijkstra(int src, int [] cost, int [] parents) {
+            Arrays.fill(cost, INF);
+            cost[src] = 0;
+
+        PriorityQueue<Edge> pq = new PriorityQueue<>(new Comparator<Edge>() {//comparing the weights in ascending order
+            public int compare(Edge a, Edge b) {
+                return Integer.compare(a.weight, b.weight);
+            }
+        });
+            pq.offer(new Edge(src, 0));
+
+            while (!pq.isEmpty()) {
+                 Edge u = pq.poll();
+                for (Edge e : adj.get(u.dest)) {
+                    int v = e.dest;
+                    int alt = cost[u.dest] + e.weight;
+                    if (alt < cost[v]) {
+                        cost[v] = alt;
+                        parents[v] = u.dest;
+                        pq.offer(new Edge(v, cost[v]));
+                    }
+                }
+            }
 
     }
 
@@ -126,6 +147,13 @@ class Graph {
     public static void main(String[] args) {
         Graph G = new Graph("D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Shortest path\\Shortest-Paths-Algorithms\\input.txt");
         G.printG();
+        int [] cost = new int[G.V];
+        int [] p = new int[G.V];
+        G.Dijkstra(0,cost,p);
+        for (int i = 0; i < G.V; i++) {
+            System.out.println("node "+ i +" with coast " + cost[i] + " whose parent is "+p[i]+" ");
+        }
+
     }
 
 
