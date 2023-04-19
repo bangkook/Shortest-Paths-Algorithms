@@ -65,6 +65,7 @@ class Graph {
         }
 
     }
+
     public void Dijkstra(int src, int [] cost, int [] parents) {
             Arrays.fill(cost, INF);
             cost[src] = 0;
@@ -91,8 +92,44 @@ class Graph {
 
     }
 
-    public void BellmanFord() {
+    public boolean BellmanFord(int src, int [] cost, int [] parents) {
+        Arrays.fill(cost, INF);
+        Arrays.fill(parents, -1); // ?? not sure. I made it like that to distinguish between
+        // nodes with 0 as a parent and null as a parent
+        cost[src] = 0;
 
+        for (int i = 0; i < V-1; i++) {
+//            System.out.println("i = "+ i);
+            // u --> src, v --> dest
+            for(int u = 0; u < V; u++){
+                for(Edge e : adj.get(u)){
+                    int v = e.dest;
+                    int weight = e.weight;
+//                    System.out.println("u = " + u +" , v = " + v + " , weight = " + e.weight );
+                    if(cost[v] > cost[u] + weight){
+                        cost[v] = cost[u] + weight;
+                        parents[v] = u;
+//                        System.out.println("============================================");
+//                        System.out.println("Updating node v = "+v);
+//                        System.out.println("cost["+u+"] = "+ cost[u]+" , weight of u & v = " +weight);
+                    }
+                }
+            }
+        }
+        boolean hasNegativeCycle = false;
+        // run Bellman Ford once more to detect negative cycles
+        for(int u = 0; u < V; u++){
+            for(Edge e : adj.get(u)){
+                int v = e.dest;
+                int weight = e.weight;
+                // if cost changes, then there is a negative weight cycle
+                if(cost[v] > cost[u] + weight){
+                    cost[v] = cost[u] + weight;
+                    hasNegativeCycle = true;
+                }
+            }
+        }
+        return hasNegativeCycle;
     }
 
     public boolean FloydWarshall(int[][] cost, int[][] next) {
@@ -140,20 +177,33 @@ class Graph {
                 }
             }
         }
-
         return hasNegativeCycle;
     }
 
     public static void main(String[] args) {
-        Graph G = new Graph("D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Shortest path\\Shortest-Paths-Algorithms\\input.txt");
-        G.printG();
+        // Testing Dijkstra
+//        Graph G = new Graph("D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Shortest path\\Shortest-Paths-Algorithms\\input.txt");
+//        int [] cost = new int[G.V];
+//        int [] p = new int[G.V];
+//        G.Dijkstra(0,cost,p);
+//        for (int i = 0; i < G.V; i++) {
+//            System.out.println("node "+ i +" with cost " + cost[i] + " whose parent is "+p[i]+" ");
+//        }
+
+        // Testing Bellman Ford
+        Graph G = new Graph("D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 2\\Shortest-Paths-Algorithms\\input.txt");
+//        Graph G = new Graph("D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 2\\Shortest-Paths-Algorithms\\cycle.txt");
+//        G.printG();
         int [] cost = new int[G.V];
         int [] p = new int[G.V];
-        G.Dijkstra(0,cost,p);
-        for (int i = 0; i < G.V; i++) {
-            System.out.println("node "+ i +" with coast " + cost[i] + " whose parent is "+p[i]+" ");
+        boolean hasNegativeCycle = G.BellmanFord(0,cost,p);
+        if(hasNegativeCycle){
+            System.out.println("The graph contains negative cycles");
+            return;
         }
-
+        for (int i = 0; i < G.V; i++) {
+            System.out.println("node "+ i +" , cost = " + cost[i] + " , parent = "+p[i]);
+        }
     }
 
 
