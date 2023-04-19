@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 class Graph {
@@ -22,9 +27,45 @@ class Graph {
     }
 
     private void initialize(String filename) {
+        try {
+            File file = new File(filename);
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            boolean VE = true;
+            while ((line = br.readLine()) != null) {
+                String[] input = line.split(" ");
+                if(VE){
+                    V = Integer.parseInt(input[0]);
+                    E = Integer.parseInt(input[1]);
+                    adj = new ArrayList<>(V);
+                    for (int i = 0; i < V; i++) { //add list for each vertex
+                        adj.add(new ArrayList<>());
+                    }
+                    VE = false;
+                }else{
+                    int from = Integer.parseInt(input[0]);
+                    int to = Integer.parseInt(input[1]);
+                    int weight = Integer.parseInt(input[2]) ;
+                    adj.get(from).add(new Edge(to, weight));
+                }
+            }
+            br.close();
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void printG(){
+        for (int i = 0; i < V; i++) {
+            for (Edge edge : adj.get(i)) {
+                System.out.print("from: " + i +" to: ");
+                System.out.print(edge.dest +" weight: " +"(" + edge.weight + ") ");
+            }
+            System.out.println();
+        }
 
     }
-
     public void Dijkstra() {
 
     }
@@ -80,6 +121,11 @@ class Graph {
         }
 
         return hasNegativeCycle;
+    }
+
+    public static void main(String[] args) {
+        Graph G = new Graph("D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Shortest path\\Shortest-Paths-Algorithms\\input.txt");
+        G.printG();
     }
 
 
