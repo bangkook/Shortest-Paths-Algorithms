@@ -106,12 +106,16 @@ class Graph {
                     int v = e.dest;
                     int weight = e.weight;
 //                    System.out.println("u = " + u +" , v = " + v + " , weight = " + e.weight );
-                    if(cost[v] > cost[u] + weight){
+//                    System.out.println("cost["+u+"] = "+ cost[u]+" , weight of u & v = " +weight);
+//                    System.out.println("cost["+v+"] = "+ cost[v]+" , weight of u & v = " +weight);
+//                    System.out.println("===========after=========================");
+                    if(cost[u]!=INF && cost[v] > cost[u] + weight){
                         cost[v] = cost[u] + weight;
                         parents[v] = u;
 //                        System.out.println("============================================");
 //                        System.out.println("Updating node v = "+v);
 //                        System.out.println("cost["+u+"] = "+ cost[u]+" , weight of u & v = " +weight);
+//                        System.out.println("cost["+v+"] = "+ cost[v]+" , weight of u & v = " +weight);
                     }
                 }
             }
@@ -123,7 +127,7 @@ class Graph {
                 int v = e.dest;
                 int weight = e.weight;
                 // if cost changes, then there is a negative weight cycle
-                if(cost[v] > cost[u] + weight){
+                if(cost[u]!=INF && cost[v] > cost[u] + weight){
                     cost[v] = cost[u] + weight;
                     hasNegativeCycle = true;
                 }
@@ -191,7 +195,7 @@ class Graph {
 //        }
 
         // Testing Bellman Ford
-        Graph G = new Graph("D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 2\\Shortest-Paths-Algorithms\\input.txt");
+        Graph G = new Graph("C:\\Users\\ita\\OneDrive\\Documents\\GitHub\\Shortest-Paths-Algorithms\\positiveCycle.txt");
 //        Graph G = new Graph("D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 2\\Shortest-Paths-Algorithms\\cycle.txt");
 //        G.printG();
         int [] cost = new int[G.V];
@@ -203,6 +207,14 @@ class Graph {
         }
         for (int i = 0; i < G.V; i++) {
             System.out.println("node "+ i +" , cost = " + cost[i] + " , parent = "+p[i]);
+        }
+
+        for (int i = 0; i < G.V; i++) {
+            System.out.print(cost[i] + ",");
+        }
+        System.out.println("");
+        for (int i = 0; i < G.V; i++) {
+            System.out.print(p[i] + ",");
         }
     }
 
