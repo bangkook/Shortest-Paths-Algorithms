@@ -25,6 +25,10 @@ class Graph {
         this.initialize(filename);
     }
 
+    public int size(){
+        return this.V;
+    }
+
     private void initialize(String filename) {
         try {
             File file = new File(filename);
@@ -67,28 +71,28 @@ class Graph {
     }
 
     public void Dijkstra(int src, int [] cost, int [] parents) {
-            Arrays.fill(cost, INF);
-            cost[src] = 0;
+        Arrays.fill(cost, INF);
+        cost[src] = 0;
 
         PriorityQueue<Edge> pq = new PriorityQueue<>(new Comparator<Edge>() {//comparing the weights in ascending order
             public int compare(Edge a, Edge b) {
                 return Integer.compare(a.weight, b.weight);
             }
         });
-            pq.offer(new Edge(src, 0));
+        pq.offer(new Edge(src, 0));
 
-            while (!pq.isEmpty()) {
-                 Edge u = pq.poll();
-                for (Edge e : adj.get(u.dest)) {
-                    int v = e.dest;
-                    int alt = cost[u.dest] + e.weight;
-                    if (alt < cost[v]) {
-                        cost[v] = alt;
-                        parents[v] = u.dest;
-                        pq.offer(new Edge(v, cost[v]));
-                    }
+        while (!pq.isEmpty()) {
+            Edge u = pq.poll();
+            for (Edge e : adj.get(u.dest)) {
+                int v = e.dest;
+                int alt = cost[u.dest] + e.weight;
+                if (alt < cost[v]) {
+                    cost[v] = alt;
+                    parents[v] = u.dest;
+                    pq.offer(new Edge(v, cost[v]));
                 }
             }
+        }
 
     }
 
@@ -133,7 +137,7 @@ class Graph {
                 }
             }
         }
-        return hasNegativeCycle;
+        return !hasNegativeCycle;
     }
 
     public boolean FloydWarshall(int[][] cost, int[][] next) {
@@ -141,6 +145,7 @@ class Graph {
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
                 cost[i][j] = INF;
+
                 if (i == j) // Path cost from node to itself equals 0
                     cost[i][j] = 0;
             }
@@ -155,34 +160,56 @@ class Graph {
             }
         }
 
+        boolean hasNegativeCycle = false;
         // Execute FW for all pairs of the graph
         for (int k = 0; k < V; k++) {
             for (int i = 0; i < V; i++) {
                 for (int j = 0; j < V; j++) {
-                    if (cost[i][k] + cost[k][j] < cost[i][j]) {
+                    if (cost[i][k] != INF && cost[k][j] != INF && cost[i][k] + cost[k][j] < cost[i][j]) {
                         cost[i][j] = cost[i][k] + cost[k][j];
                         next[i][j] = next[i][k];
                     }
                 }
+                if(cost[k][k] < 0)
+                    hasNegativeCycle = true;
             }
         }
 
-        boolean hasNegativeCycle = false;
+        /*boolean hasNegativeCycle = false;
         // Run FW one more time to detect negative cycles
         for (int k = 0; k < V; k++) {
             for (int i = 0; i < V; i++) {
                 for (int j = 0; j < V; j++) {
                     // If the cost can still be improved, a negative cycle is detected
-                    if (cost[i][k] + cost[k][j] < cost[i][j]) {
+                    // or a node has negative cost to itself
+                    if(cost[i][k] != INF && cost[k][j] != INF && cost[k][k] < 0){
                         cost[i][j] = -INF;
                         next[i][j] = -1;
                         hasNegativeCycle = true;
                     }
                 }
             }
-        }
-        return hasNegativeCycle;
+        }*/
+        return !hasNegativeCycle;
     }
+
+    public List<Integer> getFWPath(int src, int dest, int[][] next, int[][] cost){
+        List<Integer> path = new ArrayList<>();
+        // There is no path between the 2 nodes
+        if(cost[src][dest] == INF)
+            return path;
+        int cur = src;
+        for(; cur != dest; cur = next[cur][dest]){
+            // Path passes through a negative cycle
+            if(cur == -1) return null;
+            path.add(cur);
+        }
+        // If the destination node has negative cycle to itself
+        if(next[cur][dest] == -1) return null;
+        path.add(cur);
+        return path;
+    }
+
 
     public static void main(String[] args) {
         // Testing Dijkstra
