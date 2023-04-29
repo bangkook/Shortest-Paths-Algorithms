@@ -71,6 +71,7 @@ class Graph {
     }
 
     public void Dijkstra(int src, int [] cost, int [] parents) {
+
         Arrays.fill(cost, INF);
         Arrays.fill(parents, -1);
         cost[src] = 0;
@@ -94,6 +95,11 @@ class Graph {
                 }
             }
         }
+//        for(int i = 0 ;i <cost.length ;i++){
+//            if(cost[i]<0){
+//                throw new IllegalArgumentException("Dijkstra method cannot cope with negative weights.");
+//            }
+//        }
 
     }
     public  List<Integer> getPath(int src, int dst,int [] cost ,int [] parents){
