@@ -84,5 +84,16 @@ public class DijkstraTest {
             }
             assertTrue(isValid);
         }
+        @org.junit.Test
+        public void unReachable() {
+            Graph G = new Graph("testcases\\Bellman\\unReachable.txt");
+            int [] cost = new int[7];
+            int [] p = new int[7];
+            G.Dijkstra(0,cost,p);
+            int [] correctCost ={0,2,3,2147483647,2147483647,2147483647,2147483647};
+            int []correctP= {-1,0,1,-1,-1,-1,-1};
+            Assert.assertArrayEquals(cost,correctCost);
+            Assert.assertArrayEquals(p,correctP);
+        }
 }
 

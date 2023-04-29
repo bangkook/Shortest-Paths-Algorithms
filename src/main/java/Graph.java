@@ -71,18 +71,18 @@ class Graph {
         }
 
     }
-
+    PriorityQueue<Edge> pq = new PriorityQueue<>(new Comparator<Edge>() {//comparing the weights in ascending order
+        public int compare(Edge a, Edge b) {
+            return Integer.compare(a.weight, b.weight);
+        }
+    });
     public void Dijkstra(int src, int [] cost, int [] parents) {
 
         Arrays.fill(cost, INF);
         Arrays.fill(parents, -1);
         cost[src] = 0;
 
-        PriorityQueue<Edge> pq = new PriorityQueue<>(new Comparator<Edge>() {//comparing the weights in ascending order
-            public int compare(Edge a, Edge b) {
-                return Integer.compare(a.weight, b.weight);
-            }
-        });
+
         pq.offer(new Edge(src, 0));
 
         while (!pq.isEmpty()) {

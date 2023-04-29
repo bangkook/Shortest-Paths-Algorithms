@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19a4ef30-c99f-4440-97c4-9f93c9775d5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/OnlyOneVertex.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dijkstrainput.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/disconnectedGraph.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/multipleShortestPaths.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parallelEdges.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/DijkstraTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shortest-Paths-Algorithms.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graph$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Graph$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Graph.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Graph.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GraphCLI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GraphCLI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/BellmanFordTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/BellmanFordTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testcases/compare100.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/DijkstraTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DijkstraTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,16 +72,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DijkstraTest.DisconnectedGraphTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Shortest-Paths-Algorithms" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="DijkstraTest" />
-      <option name="METHOD_NAME" value="DisconnectedGraphTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DijkstraTest.NegativeWeightsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Shortest-Paths-Algorithms" />
       <option name="PACKAGE_NAME" value="" />
@@ -122,9 +102,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DijkstraTest.unReachable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Shortest-Paths-Algorithms" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DijkstraTest" />
+      <option name="METHOD_NAME" value="unReachable" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
+      <item itemvalue="JUnit.DijkstraTest.unReachable" />
       <item itemvalue="JUnit.DijkstraTest" />
-      <item itemvalue="JUnit.DijkstraTest.DisconnectedGraphTest" />
       <item itemvalue="JUnit.DijkstraTest.NegativeWeightsTest" />
       <item itemvalue="JUnit.DijkstraTest.OnlyOneVertexTest" />
       <item itemvalue="JUnit.DijkstraTest.multipleShortestPathsTest" />
@@ -132,10 +122,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.DijkstraTest" />
+        <item itemvalue="JUnit.DijkstraTest.unReachable" />
         <item itemvalue="JUnit.DijkstraTest.multipleShortestPathsTest" />
         <item itemvalue="JUnit.DijkstraTest.OnlyOneVertexTest" />
         <item itemvalue="JUnit.DijkstraTest.NegativeWeightsTest" />
-        <item itemvalue="JUnit.DijkstraTest.DisconnectedGraphTest" />
       </list>
     </recent_temporary>
   </component>
