@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19a4ef30-c99f-4440-97c4-9f93c9775d5b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Shortest-Paths-Algorithms.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Shortest-Paths-Algorithms.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Graph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OnlyOneVertex.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dijkstrainput.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/disconnectedGraph.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/multipleShortestPaths.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parallelEdges.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/DijkstraTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shortest-Paths-Algorithms.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Graph$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Graph$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Graph.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Graph.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GraphCLI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GraphCLI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/BellmanFordTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/BellmanFordTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +28,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit4 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -41,17 +50,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
-    "last_opened_file_path": "C:/Users/ita/OneDrive/Documents/GitHub/Shortest-Paths-Algorithms",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ita/OneDrive/Documents/GitHub/Shortest-Paths-Algorithms&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -63,60 +72,70 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BellmanFordTest.positiveCycle">
-    <configuration name="Graph" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Graph" />
-      <module name="Shortest-Paths-Algorithms" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BellmanFordTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.DijkstraTest">
+    <configuration name="DijkstraTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Shortest-Paths-Algorithms" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BellmanFordTest" />
+      <option name="MAIN_CLASS_NAME" value="DijkstraTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BellmanFordTest.killer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DijkstraTest.DisconnectedGraphTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Shortest-Paths-Algorithms" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BellmanFordTest" />
-      <option name="METHOD_NAME" value="killer" />
+      <option name="MAIN_CLASS_NAME" value="DijkstraTest" />
+      <option name="METHOD_NAME" value="DisconnectedGraphTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BellmanFordTest.positiveCycle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DijkstraTest.NegativeWeightsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Shortest-Paths-Algorithms" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BellmanFordTest" />
-      <option name="METHOD_NAME" value="positiveCycle" />
+      <option name="MAIN_CLASS_NAME" value="DijkstraTest" />
+      <option name="METHOD_NAME" value="NegativeWeightsTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BellmanFordTest.unReachable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DijkstraTest.OnlyOneVertexTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Shortest-Paths-Algorithms" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BellmanFordTest" />
-      <option name="METHOD_NAME" value="unReachable" />
+      <option name="MAIN_CLASS_NAME" value="DijkstraTest" />
+      <option name="METHOD_NAME" value="OnlyOneVertexTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DijkstraTest.multipleShortestPathsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Shortest-Paths-Algorithms" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DijkstraTest" />
+      <option name="METHOD_NAME" value="multipleShortestPathsTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.DijkstraTest" />
+      <item itemvalue="JUnit.DijkstraTest.DisconnectedGraphTest" />
+      <item itemvalue="JUnit.DijkstraTest.NegativeWeightsTest" />
+      <item itemvalue="JUnit.DijkstraTest.OnlyOneVertexTest" />
+      <item itemvalue="JUnit.DijkstraTest.multipleShortestPathsTest" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BellmanFordTest.positiveCycle" />
-        <item itemvalue="Application.Graph" />
-        <item itemvalue="JUnit.BellmanFordTest" />
-        <item itemvalue="JUnit.BellmanFordTest.unReachable" />
-        <item itemvalue="JUnit.BellmanFordTest.killer" />
+        <item itemvalue="JUnit.DijkstraTest" />
+        <item itemvalue="JUnit.DijkstraTest.multipleShortestPathsTest" />
+        <item itemvalue="JUnit.DijkstraTest.OnlyOneVertexTest" />
+        <item itemvalue="JUnit.DijkstraTest.NegativeWeightsTest" />
+        <item itemvalue="JUnit.DijkstraTest.DisconnectedGraphTest" />
       </list>
     </recent_temporary>
   </component>
