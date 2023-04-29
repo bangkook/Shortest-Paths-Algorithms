@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.*;
 
 class Graph {
@@ -22,7 +23,8 @@ class Graph {
     private List<List<Edge>> adj;
 
     public Graph(String filename) {
-        this.initialize(filename);
+        String absolutePath = Paths.get("").toAbsolutePath() + File.separator + filename;
+        this.initialize(absolutePath);
     }
 
     public int size(){
@@ -244,8 +246,8 @@ class Graph {
 //        }
 
         // Testing Bellman Ford
-        Graph G = new Graph("C:\\Users\\ita\\OneDrive\\Documents\\GitHub\\Shortest-Paths-Algorithms\\positiveCycle.txt");
-//        Graph G = new Graph("D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 2\\Shortest-Paths-Algorithms\\cycle.txt");
+//        Graph G = new Graph("C:\\Users\\ita\\OneDrive\\Documents\\GitHub\\Shortest-Paths-Algorithms\\positiveCycle.txt");
+        Graph G = new Graph("testcases\\Bellman\\input.txt");
 //        G.printG();
         int [] cost = new int[G.V];
         int [] p = new int[G.V];

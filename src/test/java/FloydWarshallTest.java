@@ -12,7 +12,7 @@ public class FloydWarshallTest {
     @Test
     // Test small graph with positive edges
     public void testAllPositive(){
-        Graph G = new Graph("C:\\Users\\cyber\\Desktop\\Shortest-Paths-Algorithms\\testcases\\FW\\5.txt");
+        Graph G = new Graph("testcases\\FW\\5.txt");
         int n = G.size();
         int[][] cost = new int[n][n];
         int[][] next = new int[n][n];
@@ -31,7 +31,7 @@ public class FloydWarshallTest {
     @Test
     // Test Dense graph with all weights positive
     public void testAllPositiveDense(){
-        Graph G = new Graph("C:\\Users\\cyber\\Desktop\\Shortest-Paths-Algorithms\\testcases\\FW\\1.txt");
+        Graph G = new Graph("testcases\\FW\\1.txt");
         int n = G.size();
         int[][] cost = new int[n][n];
         int[][] next = new int[n][n];
@@ -49,7 +49,7 @@ public class FloydWarshallTest {
 
     @Test
     public void testUnreachable(){
-        Graph G = new Graph("C:\\Users\\cyber\\Desktop\\Shortest-Paths-Algorithms\\testcases\\FW\\2.txt");
+        Graph G = new Graph("testcases\\FW\\2.txt");
         int n = G.size();
         int[][] cost = new int[n][n];
         int[][] next = new int[n][n];
@@ -67,7 +67,7 @@ public class FloydWarshallTest {
     @Test
     // Test graph with negative weights but no negative cycles
     public void testNegativeWeight(){
-        Graph G = new Graph("C:\\Users\\cyber\\Desktop\\Shortest-Paths-Algorithms\\testcases\\FW\\4.txt");
+        Graph G = new Graph("testcases\\FW\\4.txt");
         int n = G.size();
         int[][] cost = new int[n][n];
         int[][] next = new int[n][n];
@@ -88,7 +88,7 @@ public class FloydWarshallTest {
     @Test
     // Test graph with negative cycles
     public void testNegativeCycles(){
-        Graph G = new Graph("C:\\Users\\cyber\\Desktop\\Shortest-Paths-Algorithms\\testcases\\FW\\3_negative.txt");
+        Graph G = new Graph("testcases\\FW\\3_negative.txt");
         int n = G.size();
         int[][] cost = new int[n][n];
         int[][] next = new int[n][n];

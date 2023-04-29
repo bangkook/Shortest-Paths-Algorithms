@@ -10,7 +10,7 @@ public class DijkstraTest {
 
         @Test
         public void DijkstraInput() {
-            Graph G = new Graph("D:\\2sd year semester 2\\DS\\labs\\Shortest-Paths-Algorithms\\dijkstrainput.txt");
+            Graph G = new Graph("testcases\\Dijkstra\\dijkstrainput.txt");
             int [] cost = new int[5];
             int [] p = new int[5];
             G.Dijkstra(0,cost,p);
@@ -21,7 +21,7 @@ public class DijkstraTest {
         }
         @Test
         public void NegativeWeightsTest() {
-            Graph G = new Graph("D:\\2sd year semester 2\\DS\\labs\\Shortest-Paths-Algorithms\\input.txt");
+            Graph G = new Graph("testcases\\Dijkstra\\input.txt");
             int[] cost = new int[7];
             int[] p = new int[7];
 
@@ -34,7 +34,7 @@ public class DijkstraTest {
 
         @Test
         public void ParallelEdgesTest() {
-            Graph G = new Graph("D:\\2sd year semester 2\\DS\\labs\\Shortest-Paths-Algorithms\\parallelEdges.txt");
+            Graph G = new Graph("testcases\\Dijkstra\\parallelEdges.txt");
             int[] cost = new int[5];
             int[] p = new int[5];
             G.Dijkstra(0,cost,p);
@@ -45,7 +45,7 @@ public class DijkstraTest {
         }
         @Test
         public void DisconnectedGraphTest() {
-            Graph G = new Graph("D:\\2sd year semester 2\\DS\\labs\\Shortest-Paths-Algorithms\\disconnectedGraph.txt");
+            Graph G = new Graph("testcases\\Dijkstra\\disconnectedGraph.txt");
             int[] cost = new int[6];
             int[] p = new int[6];
             G.Dijkstra(0,cost,p);
@@ -56,7 +56,7 @@ public class DijkstraTest {
         }
         @Test
         public void OnlyOneVertexTest() {
-            Graph G = new Graph("D:\\2sd year semester 2\\DS\\labs\\Shortest-Paths-Algorithms\\OnlyOneVertex.txt");
+            Graph G = new Graph("testcases\\Dijkstra\\OnlyOneVertex.txt");
             int[] cost = new int[1];
             int[] p = new int[1];
             G.Dijkstra(0,cost,p);
@@ -67,7 +67,7 @@ public class DijkstraTest {
         }
         @Test
         public void multipleShortestPathsTest() {
-            Graph G = new Graph("D:\\2sd year semester 2\\DS\\labs\\Shortest-Paths-Algorithms\\multipleShortestPaths.txt");
+            Graph G = new Graph("testcases\\Dijkstra\\multipleShortestPaths.txt");
             int[] cost = new int[6];
             int[] p = new int[6];
             G.Dijkstra(0, cost, p);
