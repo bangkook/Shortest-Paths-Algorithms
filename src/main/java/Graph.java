@@ -17,7 +17,7 @@ class Graph {
     }
 
     // V -> number of vertices, E -> number of edges
-    private int V, E;
+    public int V, E;
     // Adjacency list
     private List<List<Edge>> adj;
 
@@ -72,6 +72,7 @@ class Graph {
 
     public void Dijkstra(int src, int [] cost, int [] parents) {
         Arrays.fill(cost, INF);
+        Arrays.fill(parents, -1);
         cost[src] = 0;
 
         PriorityQueue<Edge> pq = new PriorityQueue<>(new Comparator<Edge>() {//comparing the weights in ascending order
@@ -94,6 +95,21 @@ class Graph {
             }
         }
 
+    }
+    public  List<Integer> getPath(int src, int dst,int [] cost ,int [] parents){
+        List<Integer> path = new ArrayList<>();
+        if(cost[dst] != INF ){
+            path.add(dst);
+            int temp = parents[dst];
+            while (temp != src && temp != -1){
+                path.add(temp);
+                temp = parents[temp];
+            }
+            path.add(src);
+            Collections.reverse(path);
+            return path;
+        }
+        return path;
     }
 
     public boolean BellmanFord(int src, int [] cost, int [] parents) {
