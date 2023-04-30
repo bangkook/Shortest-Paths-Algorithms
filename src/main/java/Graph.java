@@ -21,6 +21,7 @@ class Graph {
     public int V, E;
     // Adjacency list
     private List<List<Edge>> adj;
+    private ArrayList<int[]> edges = new ArrayList<>();
 
     public Graph(String filename) {
         String absolutePath = Paths.get("").toAbsolutePath() + File.separator + filename;
@@ -61,6 +62,7 @@ class Graph {
             e.printStackTrace();
         }
     }
+
     private void printG(){
         for (int i = 0; i < V; i++) {
             for (Edge edge : adj.get(i)) {
@@ -119,46 +121,49 @@ class Graph {
         }
         return path;
     }
+    private void initiateBellman(){
+//        ArrayList<int[]> edges = new ArrayList<>();
+        for(int u = 0; u < V; u++) {
+            // u --> src, v --> dest
+            for (Edge e : adj.get(u)) {
+                int v = e.dest;
+                int weight = e.weight;
+                edges.add(new int[]{u, v, weight});
+            }
+        }
 
+    }
     public boolean BellmanFord(int src, int [] cost, int [] parents) {
         Arrays.fill(cost, INF);
-        Arrays.fill(parents, -1); // ?? not sure. I made it like that to distinguish between
-        // nodes with 0 as a parent and null as a parent
+        Arrays.fill(parents, -1);
         cost[src] = 0;
+        // create array of edges
+        initiateBellman();
 
         for (int i = 0; i < V-1; i++) {
-//            System.out.println("i = "+ i);
-            // u --> src, v --> dest
-            for(int u = 0; u < V; u++){
-                for(Edge e : adj.get(u)){
-                    int v = e.dest;
-                    int weight = e.weight;
-//                    System.out.println("u = " + u +" , v = " + v + " , weight = " + e.weight );
-//                    System.out.println("cost["+u+"] = "+ cost[u]+" , weight of u & v = " +weight);
-//                    System.out.println("cost["+v+"] = "+ cost[v]+" , weight of u & v = " +weight);
-//                    System.out.println("===========after=========================");
-                    if(cost[u]!=INF && cost[v] > cost[u] + weight){
-                        cost[v] = cost[u] + weight;
-                        parents[v] = u;
-//                        System.out.println("============================================");
-//                        System.out.println("Updating node v = "+v);
-//                        System.out.println("cost["+u+"] = "+ cost[u]+" , weight of u & v = " +weight);
-//                        System.out.println("cost["+v+"] = "+ cost[v]+" , weight of u & v = " +weight);
-                    }
+            for(int j = 0; j < edges.size(); j++){
+                // u --> src, v --> dest
+                int u = edges.get(j)[0];
+                int v = edges.get(j)[1];
+                int weight = edges.get(j)[2];
+//                System.out.println("u = " + u + ", v = "+v+", weight = "+ weight);
+                if(cost[u] != INF && cost[v] > cost[u] + weight) {
+                    cost[v] = cost[u] + weight;
+                    parents[v] = u;
                 }
             }
         }
+
         boolean hasNegativeCycle = false;
         // run Bellman Ford once more to detect negative cycles
-        for(int u = 0; u < V; u++){
-            for(Edge e : adj.get(u)){
-                int v = e.dest;
-                int weight = e.weight;
-                // if cost changes, then there is a negative weight cycle
-                if(cost[u]!=INF && cost[v] > cost[u] + weight){
-                    cost[v] = cost[u] + weight;
-                    hasNegativeCycle = true;
-                }
+        for(int i = 0; i < edges.size(); i++) {
+            int u = edges.get(i)[0];
+            int v = edges.get(i)[1];
+            int weight = edges.get(i)[2];
+            // if cost changes, then there is a negative weight cycle
+            if (cost[u] != INF && cost[v] > cost[u] + weight) {
+                cost[v] = cost[u] + weight;
+                hasNegativeCycle = true;
             }
         }
         return !hasNegativeCycle;
@@ -236,37 +241,58 @@ class Graph {
 
 
     public static void main(String[] args) {
-        // Testing Dijkstra
-//        Graph G = new Graph("D:\\CSE25\\Second year\\Second term\\Data structure 2\\Projects\\Shortest path\\Shortest-Paths-Algorithms\\input.txt");
-//        int [] cost = new int[G.V];
-//        int [] p = new int[G.V];
-//        G.Dijkstra(0,cost,p);
-//        for (int i = 0; i < G.V; i++) {
-//            System.out.println("node "+ i +" with cost " + cost[i] + " whose parent is "+p[i]+" ");
-//        }
+        int numV = 500;
+//        Graph G = new Graph("testcases\\Dijkstra\\dijkstrainput.txt");
 
-        // Testing Bellman Ford
-//        Graph G = new Graph("C:\\Users\\ita\\OneDrive\\Documents\\GitHub\\Shortest-Paths-Algorithms\\positiveCycle.txt");
-        Graph G = new Graph("testcases\\Bellman\\input.txt");
-//        G.printG();
-        int [] cost = new int[G.V];
+//        Graph G = new Graph("testcases\\compare20.txt");
+//        Graph G = new Graph("testcases\\compare40.txt");
+//        Graph G = new Graph("testcases\\compare100.txt");
+//        Graph G = new Graph("testcases\\compare500dense.txt");
+        Graph G = new Graph("testcases\\compare500sparse.txt");
+
         int [] p = new int[G.V];
-        boolean hasNegativeCycle = G.BellmanFord(0,cost,p);
-        if(hasNegativeCycle){
-            System.out.println("The graph contains negative cycles");
-            return;
+        int [] cost = new int[G.V];
+        long sumD = 0;
+        for(int i = 0 ; i < 6; i++){
+            for(int j = 0; j < numV;j++){
+                long startD = System.nanoTime();
+                G.Dijkstra(j,cost,p);
+                long endD= System.nanoTime();
+                long elapsedTime = endD - startD;
+                sumD += elapsedTime;
+            }
         }
-        for (int i = 0; i < G.V; i++) {
-            System.out.println("node "+ i +" , cost = " + cost[i] + " , parent = "+p[i]);
-        }
+        long averageD = sumD / 6;
+        System.out.println("average D= " + averageD + " ns");
 
-        for (int i = 0; i < G.V; i++) {
-            System.out.print(cost[i] + ",");
+//        G.initiateBellman();
+        long sumB = 0;
+        for(int i = 0 ; i < 6; i++){
+            for(int j = 0; j< numV; j++){
+                long startB = System.nanoTime();
+                G.BellmanFord(0,cost,p);
+                long endB= System.nanoTime();
+                long elapsedTime = endB - startB;
+                sumB += elapsedTime;
+            }
+//            System.out.println("elapsed = "+elapsedTime);
+//            System.out.println("sumB = "+sumB);
         }
-        System.out.println("");
-        for (int i = 0; i < G.V; i++) {
-            System.out.print(p[i] + ",");
-        }
+        long averageB = sumB / 6;
+        System.out.println("average B= " + averageB + " ns");
+
+//        int [][] costF = new int[G.V][G.V];
+//        int nextF[][] = new int[G.V][G.V];
+//        long sumF = 0;
+//        for(int i = 0;i <6 ; i++){
+//            long startTime = System.nanoTime();
+//            G.FloydWarshall(costF,nextF);
+//            long endTime = System.nanoTime();
+//            long elapsedTime = endTime - startTime;
+//            sumF += elapsedTime;
+//        }
+//        long averageF = sumF / 6;
+//        System.out.println("average F= " + averageF + " ns");
     }
 
 
