@@ -23,9 +23,9 @@ public class GenerateGraph {
     }
 
     public static void main(String[] args) {
-        int numNodes = 500;
-        int numEdges = 250000;
-        String filePath = "D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 2\\Shortest-Paths-Algorithms\\testcases\\compare500dense.txt";
+        int numNodes = 1000;
+        int numEdges = 250;
+        String filePath = "D:\\Second Year Computer\\Term 2\\Data Structures and Algorithms\\Labs\\Lab 2\\Shortest-Paths-Algorithms\\testcases\\compare1000sparse.txt";
 
         try {
             generateGraph(numNodes, numEdges, filePath);

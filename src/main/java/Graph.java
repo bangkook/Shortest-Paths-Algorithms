@@ -21,7 +21,7 @@ class Graph {
     public int V, E;
     // Adjacency list
     private List<List<Edge>> adj;
-    private ArrayList<int[]> edges = new ArrayList<>();
+
 
     public Graph(String filename) {
         String absolutePath = Paths.get("").toAbsolutePath() + File.separator + filename;
@@ -73,6 +73,7 @@ class Graph {
         }
 
     }
+
     PriorityQueue<Edge> pq = new PriorityQueue<>(new Comparator<Edge>() {//comparing the weights in ascending order
         public int compare(Edge a, Edge b) {
             return Integer.compare(a.weight, b.weight);
@@ -99,12 +100,6 @@ class Graph {
                 }
             }
         }
-//        for(int i = 0 ;i <cost.length ;i++){
-//            if(cost[i]<0){
-//                throw new IllegalArgumentException("Dijkstra method cannot cope with negative weights.");
-//            }
-//        }
-
     }
     public  List<Integer> getPath(int src, int dst,int [] cost ,int [] parents){
         List<Integer> path = new ArrayList<>();
@@ -121,8 +116,9 @@ class Graph {
         }
         return path;
     }
-    private void initiateBellman(){
-//        ArrayList<int[]> edges = new ArrayList<>();
+    private ArrayList<int[]> initiateBellman(){
+        // Arraylist edges initialized and used by Bellman Ford
+        ArrayList<int[]> edges = new ArrayList<>();
         for(int u = 0; u < V; u++) {
             // u --> src, v --> dest
             for (Edge e : adj.get(u)) {
@@ -131,14 +127,14 @@ class Graph {
                 edges.add(new int[]{u, v, weight});
             }
         }
-
+        return edges;
     }
     public boolean BellmanFord(int src, int [] cost, int [] parents) {
         Arrays.fill(cost, INF);
         Arrays.fill(parents, -1);
         cost[src] = 0;
         // create array of edges
-        initiateBellman();
+        ArrayList<int[]> edges = initiateBellman();
 
         for (int i = 0; i < V-1; i++) {
             for(int j = 0; j < edges.size(); j++){
@@ -146,7 +142,6 @@ class Graph {
                 int u = edges.get(j)[0];
                 int v = edges.get(j)[1];
                 int weight = edges.get(j)[2];
-//                System.out.println("u = " + u + ", v = "+v+", weight = "+ weight);
                 if(cost[u] != INF && cost[v] > cost[u] + weight) {
                     cost[v] = cost[u] + weight;
                     parents[v] = u;
@@ -203,22 +198,6 @@ class Graph {
                     hasNegativeCycle = true;
             }
         }
-
-        /*boolean hasNegativeCycle = false;
-        // Run FW one more time to detect negative cycles
-        for (int k = 0; k < V; k++) {
-            for (int i = 0; i < V; i++) {
-                for (int j = 0; j < V; j++) {
-                    // If the cost can still be improved, a negative cycle is detected
-                    // or a node has negative cost to itself
-                    if(cost[i][k] != INF && cost[k][j] != INF && cost[k][k] < 0){
-                        cost[i][j] = -INF;
-                        next[i][j] = -1;
-                        hasNegativeCycle = true;
-                    }
-                }
-            }
-        }*/
         return !hasNegativeCycle;
     }
 
@@ -238,62 +217,4 @@ class Graph {
         path.add(cur);
         return path;
     }
-
-
-    public static void main(String[] args) {
-        int numV = 500;
-//        Graph G = new Graph("testcases\\Dijkstra\\dijkstrainput.txt");
-
-//        Graph G = new Graph("testcases\\compare20.txt");
-//        Graph G = new Graph("testcases\\compare40.txt");
-//        Graph G = new Graph("testcases\\compare100.txt");
-//        Graph G = new Graph("testcases\\compare500dense.txt");
-        Graph G = new Graph("testcases\\compare500sparse.txt");
-
-        int [] p = new int[G.V];
-        int [] cost = new int[G.V];
-        long sumD = 0;
-        for(int i = 0 ; i < 6; i++){
-            for(int j = 0; j < numV;j++){
-                long startD = System.nanoTime();
-                G.Dijkstra(j,cost,p);
-                long endD= System.nanoTime();
-                long elapsedTime = endD - startD;
-                sumD += elapsedTime;
-            }
-        }
-        long averageD = sumD / 6;
-        System.out.println("average D= " + averageD + " ns");
-
-//        G.initiateBellman();
-        long sumB = 0;
-        for(int i = 0 ; i < 6; i++){
-            for(int j = 0; j< numV; j++){
-                long startB = System.nanoTime();
-                G.BellmanFord(0,cost,p);
-                long endB= System.nanoTime();
-                long elapsedTime = endB - startB;
-                sumB += elapsedTime;
-            }
-//            System.out.println("elapsed = "+elapsedTime);
-//            System.out.println("sumB = "+sumB);
-        }
-        long averageB = sumB / 6;
-        System.out.println("average B= " + averageB + " ns");
-
-//        int [][] costF = new int[G.V][G.V];
-//        int nextF[][] = new int[G.V][G.V];
-//        long sumF = 0;
-//        for(int i = 0;i <6 ; i++){
-//            long startTime = System.nanoTime();
-//            G.FloydWarshall(costF,nextF);
-//            long endTime = System.nanoTime();
-//            long elapsedTime = endTime - startTime;
-//            sumF += elapsedTime;
-//        }
-//        long averageF = sumF / 6;
-//        System.out.println("average F= " + averageF + " ns");
-    }
-
-
 }
